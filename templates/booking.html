@@ -21,7 +21,7 @@
 </div>
     <label>Room Type<select name="room_type">
 {% for room in rooms %}
-<option value="{{ room.slug }}">{{ room.name }}</option>
+<option value="{{ room.slug }}"{% if selected_slug == room.slug %} selected{% endif %}>{{ room.name }}</option>
 {% endfor %}
 </select>
 </label>
