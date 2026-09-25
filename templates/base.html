@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title or hotel.name }}</title>
+  <meta name="description" content="Explore rooms, amenities, and location in this {{ hotel.name }} portfolio concept near Harrisburg, PA.">
+  {% if site_url %}
+<link rel="canonical" href="{{ site_url }}{{ request.path }}">
+{% endif %}
+  <meta property="og:title" content="{{ page_title or hotel.name }}">
+  <meta property="og:description" content="Explore a hotel website concept for stays near Harrisburg and Hershey.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  {% if site_url %}
+<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"Hotel","name":hotel.name,"url":site_url}|tojson }}</script>
+{% endif %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+  <div class="noise">
+</div>
+  <header class="site-header glass-nav" data-reveal>
+    <a class="brand" href="{{ url_for('home') }}">
+<span>Sleep</span>Inn</a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+<span>
+</span>
+<span>
+</span>
+</button>
+    <nav class="main-nav">
+      <a href="{{ url_for('home') }}#stay">Stay</a>
+      <a href="{{ url_for('rooms') }}">Rooms</a>
+      <a href="{{ url_for('home') }}#gallery">Gallery</a>
+      <a href="{{ url_for('contact') }}">Location</a>
+      <a class="nav-cta" href="{{ url_for('booking') }}">Book Request</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for category, message in messages %}
+<div class="flash {{ category }}">{{ message }}</div>
+{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer-section">
+    <div class="marquee" aria-hidden="true">
+<span>REST EASY — HERSHEY CLOSE — HARRISBURG READY — EXPLORE ROOMS — </span>
+<span>REST EASY — HERSHEY CLOSE — HARRISBURG READY — EXPLORE ROOMS — </span>
+</div>
+    <div class="footer-grid">
+      <div>
+        <p class="eyebrow">Hotel concept</p>
+        <h2>Explore the booking flow.</h2>
+      </div>
+      <div>
+        <a class="big-link" href="{{ url_for('booking') }}">Start a booking request</a>
+        <p>{{ hotel.location }} · Portfolio concept: use official channels to confirm details.</p>
+      </div>
+    </div>
+    <p class="copyright">© {{ current_year }} {{ hotel.name }}. Demo website.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer>
+</script>
+</body>
+</html>
