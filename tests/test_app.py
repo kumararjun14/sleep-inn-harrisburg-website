@@ -9,6 +9,7 @@ class SiteTests(unittest.TestCase):
     def test_routes_and_demo_forms(self):
         for path in ("/", "/rooms", "/booking", "/contact"):
             self.assertEqual(self.client.get(path).status_code, 200, path)
+        self.assertIn(b'value="king-suite" selected', self.client.get("/booking?room=king-suite").data)
         for path in ("/booking", "/contact"):
             response = self.client.post(path, data={"name":"Guest", "email":"g@example.com"}, follow_redirects=True)
             self.assertIn(b"sent or saved", response.data)
