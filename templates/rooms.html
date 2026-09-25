@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-hero">
+<p class="eyebrow" data-reveal>Rooms & Suites</p>
+<h1 data-reveal>Choose comfort that matches your trip.</h1>
+</section>
+<section class="section room-detail-list">
+  {% for room in rooms %}
+  <article class="room-detail glass" id="{{ room.slug }}" data-reveal>
+    <img src="{{ room.image }}" alt="{{ room.name }}" loading="lazy">
+    <div>
+      <span class="pill">{{ room.tag }}</span>
+      <h2>{{ room.name }}</h2>
+      <p>{{ room.description }}</p>
+      <div class="room-specs">
+<span>{{ room.beds }}</span>
+<span>Sleeps {{ room.guests }}</span>
+<span>{{ room.size }}</span>
+</div>
+      <ul>
+{% for feature in room.features %}
+<li>{{ feature }}</li>
+{% endfor %}
+</ul>
+      <a class="button primary" href="{{ url_for('booking') }}?room={{ room.slug }}">Request this room</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

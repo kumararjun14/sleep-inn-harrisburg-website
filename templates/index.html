@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero" id="top">
+  <div class="hero-bg">
+</div>
+  <div class="hero-content" data-reveal>
+    <p class="eyebrow">Harrisburg / Hershey North</p>
+    <h1>Rest easy near Hershey, with room to reset.</h1>
+    <p class="hero-copy">A modern hotel experience built for families, business travelers, tournaments, road trips, and weekend getaways.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="{{ url_for('booking') }}">Explore booking flow</a>
+      <a class="button ghost" href="#rooms-preview">Explore rooms</a>
+    </div>
+  </div>
+  <div class="hero-card glass" data-reveal>
+<span class="stat">Stay</span>
+<p>Explore a hotel website concept for the Harrisburg and Hershey area.</p>
+</div>
+</section>
+
+<section class="ticker-section">
+  <div class="marquee">
+<span>ROOMS — LOCATION — HERSHEY — FAMILY STAYS — BUSINESS TRIPS — </span>
+<span>ROOMS — LOCATION — HERSHEY — FAMILY STAYS — BUSINESS TRIPS — </span>
+</div>
+</section>
+
+<section class="section split" id="stay">
+  <div data-reveal>
+    <p class="eyebrow">Built around better stays</p>
+    <h2>Clean, comfortable, and close to what brings you here.</h2>
+  </div>
+  <p data-reveal>Explore room types, amenities, and the location in a simple flow designed for travelers. This is a portfolio concept; confirm current hotel details before booking.</p>
+</section>
+
+
+
+<section class="section" id="rooms-preview">
+  <div class="section-heading" data-reveal>
+    <p class="eyebrow">Rooms</p>
+    <h2>Pick the room that fits your trip.</h2>
+  </div>
+  <div class="room-grid">
+    {% for room in rooms %}
+    <article class="room-card" data-reveal>
+      <img src="{{ room.image }}" alt="{{ room.name }}" loading="lazy">
+      <div class="room-info glass">
+        <span class="pill">{{ room.tag }}</span>
+        <h3>{{ room.name }}</h3>
+        <p>{{ room.beds }} · Sleeps {{ room.guests }} · {{ room.size }}</p>
+        <a href="{{ url_for('rooms') }}#{{ room.slug }}">View details</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section amenities-section">
+  <div class="section-heading" data-reveal>
+<p class="eyebrow">Amenities</p>
+<h2>Everything guests expect, made simple.</h2>
+</div>
+  <div class="amenity-grid">
+    {% for amenity, desc in amenities %}
+    <div class="amenity glass" data-reveal>
+<h3>{{ amenity }}</h3>
+<p>{{ desc }}</p>
+</div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section gallery-section" id="gallery">
+  <div class="section-heading" data-reveal>
+<p class="eyebrow">Gallery</p>
+<h2>Illustrative stock imagery for this concept.</h2>
+</div>
+  <div class="gallery-grid">
+    {% for image in gallery %}
+<img src="{{ image }}" alt="Hotel gallery image" loading="lazy" data-reveal>
+{% endfor %}
+  </div>
+</section>
+
+
+
+<section class="cta-panel glass" data-reveal>
+  <p class="eyebrow">Book direct style</p>
+  <h2>Find the official booking channel before planning your stay.</h2>
+  <a class="button primary" href="{{ url_for('booking') }}">Start request</a>
+</section>
+{% endblock %}
