@@ -87,7 +87,8 @@ def booking():
     if request.method == "POST":
         flash("Portfolio demo: no booking request was sent or saved. Use the official hotel booking channel.", "notice")
         return redirect(url_for("booking"))
-    return render_template("booking.html", rooms=ROOM_TYPES, page_title="Booking Request | Sleep Inn Harrisburg")
+    return render_template("booking.html", rooms=ROOM_TYPES, selected_slug=request.args.get("room", ""),
+                           page_title="Booking Request | Sleep Inn Harrisburg")
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
